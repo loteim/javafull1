@@ -20,5 +20,18 @@
 
     </div>
 </body>
-
+<script>
+    const email = document.getElementById('id');
+    const find = document.getElementById('find');
+    find.addEventListener('click', () => {
+        if(email.value == 'acid@naver.com'){
+            alert('등록된 이메일로 메일을 보냈습니다.')
+            alert('로그인 화면으로 되돌아 갑니다.')
+                window.location.href = 'jinjalogin.html';
+        }
+        else{
+            alert('존재하지 않는 이메일입니다.')
+        }
+    })
+</script>
 </html>
