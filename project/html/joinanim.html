@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+    <link href="/project/assets/css/joinform.css" rel="stylesheet">
+    <link rel="stylesheet" href="/project/assets/css/index_style.css">
+</head>
+
+<body>
+    <header>
+      <div class="title">
+        <div class="title_name">
+          <h1 class="title_t">꼬랩★영화관</h1>
+        </div>
+        <div class="title_menu">
+          <nav>
+            <ul class="menu_a">
+              <li>
+                <a href="#">영화목록</a>
+                <ul class="submenu_a">
+                  <li><a href="#">영화1</a></li>
+                  <li><a href="#">영화2</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="#">예약</a>
+                <ul class="submenu_b">
+                  <li><a href="#">예약1</a></li>
+                  <li><a href="#">예약2</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="#">극장</a>
+                <ul class="submenu_c">
+                  <li><a href="#">극장1</a></li>
+                  <li><a href="#">극장2</a></li>
+                </ul>
+              </li>
+            </ul>
+            <ul class="menu_b">
+              <li><a href="/project/html/jinjalogin.html">로그인</a></li>
+              <li><a href="/project/html/joinanim.html">회원가입</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <div id="wrap">
+        <!--container-->
+        <div id="container">
+            <h2>이메일로 회원가입</h2>
+            <div class="joinForm">
+                <div class="fgroup"><label for="email"></label><input type="email" placeholder="이메일" name="email"></div>
+                <div class="fgroup"><label for="email"></label><input type="id" placeholder="아이디" name="id"></div>
+                <div class="fgroup"><label for="password"></label><input type="password" placeholder="비밀번호" name="password"></div>
+                <div class="fgroup"><label for="name"></label><input type="text" placeholder="이름" name="name"></div>
+                <div class="fgroup"><label for="nick"></label><input type="text" placeholder="전화번호" name="nick"></div>
+            </div>
+            <!--.joinForm-->
+            <button class="submit">가입하기</button>
+        </div>
+
+        <!--#footer-->
+        
+    </div>
+    
+    <main>
+        <fieldset>
+            <input type="text" id="useremail" placeholder="이메일">
+        </fieldset>
+        <div class="mailfail-message hide">이메일 형식이 아닙니다</div>
+
+        <fieldset>
+            <input type="text" id="username" placeholder="아이디">
+        </fieldset>
+
+        <div class="success-message hide">사용할 수 있는 아이디입니다</div>
+        <div class="failure-message hide">아이디는 4~12글자이어야 합니다</div>
+        <div class="failure-message2 hide">영어 또는 숫자만 가능합니다</div>
+
+        <fieldset>
+            <input type="password" id="password" placeholder="비밀번호" />
+        </fieldset>
+
+        <div class="strongPassword-message hide">8글자 이상, 영문, 숫자, 특수문자(@$!%*#?&)를 사용하세요</div>
+
+        <fieldset>
+            <input type="password" id="password-retype" placeholder="비밀번호 확인" />
+        </fieldset>
+        <div class="mismatch-message hide">비밀번호가 일치하지 않습니다</div>
+
+        <fieldset>
+            <input type="text" id="name" placeholder="성명" />
+        </fieldset>
+        <fieldset>
+            <input type="text" id="callname" placeholder="전화번호" />
+        </fieldset>
+        <div class="notnum-message hide">숫자만 적어야 합니다.</div>
+
+        
+
+        <fieldset class="signup">
+            <button>회원가입</button>
+        </fieldset>
+
+
+    </main>
+    <!--#wrap-->
+</body>
+
+</html>
