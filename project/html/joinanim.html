@@ -50,50 +50,58 @@
 
     
     <main>
-        <fieldset>
-            <input type="text" id="useremail" placeholder="이메일">
-        </fieldset>
-        <div class="mailsuccess-message hide">사용할 수 있는 이메일입니다</div>
-        <div class="mailfail-message hide">이메일 형식이 아닙니다</div>
+        <form action="http://127.0.0.1:8080/imsi/join.jsp" method="post">
+            <fieldset>
+                <input type="text" id="useremail" name="useremail" placeholder="이메일"
+                value="111@111.com">
+            </fieldset>
+            <div class="mailsuccess-message hide">사용할 수 있는 이메일입니다</div>
+            <div class="mailfail-message hide">이메일 형식이 아닙니다</div>
 
-        <fieldset>
-            <input type="text" id="username" placeholder="아이디" />
-        </fieldset>
+            <fieldset>
+                <input type="text" id="username" name="userId" placeholder="아이디" 
+                value="1234"/>
+            </fieldset>
 
-        <div class="success-message hide">사용할 수 있는 아이디입니다</div>
-        <div class="failure-message hide">아이디는 4~12글자이어야 합니다</div>
-        <div class="failure-message2 hide">영어 또는 숫자만 가능합니다</div>
+            <div class="success-message hide">사용할 수 있는 아이디입니다</div>
+            <div class="failure-message hide">아이디는 4~12글자이어야 합니다</div>
+            <div class="failure-message2 hide">영어 또는 숫자만 가능합니다</div>
 
-        <fieldset>
-            <input type="password" id="password" placeholder="비밀번호" />
-        </fieldset>
-        <div class="passsuccess-message hide">사용할 수 있는 비밀번호입니다</div>
-        <div class="strongPassword-message hide">8글자 이상, 영문, 숫자, 특수문자(@$!%*#?&)를 사용하세요</div>
+            <fieldset>
+                <input type="password" id="password" name="userPassword" placeholder="비밀번호" 
+                value="qweasd123#"/>
+            </fieldset>
+            <div class="passsuccess-message hide">사용할 수 있는 비밀번호입니다</div>
+            <div class="strongPassword-message hide">8글자 이상, 영문, 숫자, 특수문자(@$!%*#?&)를 사용하세요</div>
 
-        <fieldset>
-            <input type="password" id="password-retype" placeholder="비밀번호 확인" />
-        </fieldset>
-        <div class="mismatch-message hide">비밀번호가 일치하지 않습니다</div>
+            <fieldset>
+                <input type="password" id="password-retype" placeholder="비밀번호 확인" 
+                value="qweasd123#"/>
+            </fieldset>
+            <div class="mismatch-message hide">비밀번호가 일치하지 않습니다</div>
 
-        <fieldset>
-            <input type="text" id="name" placeholder="성명" />
-        </fieldset>
-        <fieldset>
-            <input type="text" id="callname" placeholder="전화번호" />
-        </fieldset>
-        <div class="notnum-message hide">숫자만 적어야 합니다.</div>
+            <fieldset>
+                <input type="text" id="name" name="userName" placeholder="성명" 
+                value="1"/>
+            </fieldset>
+            <fieldset>
+                <input type="text" id="callname" name="userCallname" placeholder="전화번호" 
+                value="2"/>
+            </fieldset>
+            <div class="notnum-message hide">숫자만 적어야 합니다.</div>
 
-        
+            
 
-        <fieldset class="signup">
-            <button type="button" id="signupim" disabled>회원가입</button>
-        </fieldset>
-        
+            <fieldset class="signup">
+                <button type="button" id="signupim">회원가입</button>
+            </fieldset>
+        </form>
 
     </main>
     <!--#wrap-->
 </body>
 <script>
+    
     let useremail = document.querySelector('#useremail'); //이메일
     let mailsuccessmessage = document.querySelector('.mailsuccess-message'); //이메일가능
     let mailfailmessage = document.querySelector('.mailfail-message'); //이메일실패
@@ -118,7 +126,6 @@
     let notnummessage = document.querySelector('.notnum-message');
     const requiredFilledCount = 6;
     const signup = document.getElementById('signupim');
-
 
 
     let required1 = 0;
@@ -271,9 +278,55 @@
         if (signup.disabled) {
             alert('Please fill at least 8 fields.');
         } else {
-            alert('회원가입 되었습니다.');
-            // 여기에 다음 단계로 넘어가는 로직을 추가하세요.
+            
+            sendData().then(res => {
+                alert(res.msg);
+                if(res.code == 200) {
                     window.location.href = '/project/html/jinjalogin.html';
+                }
+            });
+            // const form = document.querySelector('form');
+            // form.submit();
+
+
+
+
+            // alert('회원가입 되었습니다.');
+            // 여기에 다음 단계로 넘어가는 로직을 추가하세요.
+            // window.location.href = '/project/html/jinjalogin.html';
+        }
+
+        async function sendData() {
+            // const form = document.querySelector('form');
+
+            const userEmail = document.querySelector('#useremail');
+            const userId = document.querySelector('#username');
+            const userPassword = document.querySelector('#password');
+            const userName = document.querySelector('#name');
+            const userCallname = document.querySelector('#callname');
+            console.log(userEmail);
+            console.log(userId);
+            
+    
+    
+            const formData = new FormData();
+            formData.append('useremail', userEmail.value);
+            formData.append('userId', userId.value);
+            formData.append('userPassword', userPassword.value);
+            formData.append('userName', userName.value);
+            formData.append('userCallname', userCallname.value);
+            
+            const payload = new URLSearchParams(formData);
+
+            const res = await fetch('http://127.0.0.1:8080/imsi/join.jsp', {
+                method: 'post',
+                headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: payload
+            })
+            const data = await res.json();
+            return data;
         }
 
 
